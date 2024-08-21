@@ -13,7 +13,6 @@ class QuoteMachine extends Component {
     }
   }
 
-  
   // This method fetches a new quote
   fetchQuote = () => {
     // const CORS_PROXY = 'https://proxy.cors.sh/';
@@ -41,11 +40,13 @@ class QuoteMachine extends Component {
       .then(response => response.json())
       .then(data => {
         // Store all quotes in state
-        this.setState({quotes: data});
-        // Set the first quote to be default
-        if (data.length > 0) {
-          this.setQuote(0)
-        }
+        this.setState({quotes: data}, () => {
+          // This callback runs after the state has been updated
+          // Set the first quote to be default
+          if (data.length > 0) {
+            this.setQuote(0)
+          }
+        });
       })
       .catch(error => console.error('Error fetching quote:', error));
   }
@@ -53,10 +54,14 @@ class QuoteMachine extends Component {
   // Set current quote and author
   setQuote = (index) => {
     const selectedQuote = this.state.quotes[index];
-    this.setState({
-      currentQuote: selectedQuote.content,
-      currentAuthor: selectedQuote.author
-    })
+    if (selectedQuote) { // Ensure selectedQuote is not undefined
+      this.setState({
+        currentQuote: selectedQuote.content,
+        currentAuthor: selectedQuote.author
+      });
+    } else {
+      console.error('Selected quote is undefined');
+    }
   }
 
   randomQuote = () => {
