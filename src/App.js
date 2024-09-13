@@ -89,8 +89,8 @@ class QuoteMachine extends Component {
           <p id="text">{this.state.currentQuote}</p>
           <p id="author">- {this.state.currentAuthor}</p>
           <div className="button-container">
-            <a href={'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text="' + this.state.currentQuote + '" - ' + this.state.currentAuthor} target="_blank" id="tweet-quote" rel="noreferrer">Tweet</a>
-            <button id="new-quote" onClick={this.fetchQuote}>New Quote</button>
+            <a href={'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text="' + this.state.currentQuote + '" - ' + this.state.currentAuthor} target="_blank" id="tweet-quote" rel="noreferrer" className="button">Tweet</a>
+            <button id="new-quote" className="button" onClick={this.fetchQuote}>New Quote</button>
           </div>
         </div>
       </div>
